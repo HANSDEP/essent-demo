@@ -49,6 +49,20 @@
   .card b{display:block;font-size:16px;margin-bottom:6px}
   .card span{color:var(--muted);font-size:14px;line-height:1.4}
 
+  .sub{color:var(--muted);margin:-8px 0 18px;font-size:15px;line-height:1.45}
+  .klant{border:1px solid var(--line);border-radius:8px;padding:18px;background:#fff;display:flex;flex-direction:column;gap:6px;font-size:14px}
+  .klant b{font-size:16px}
+  .klant .code{font-weight:700;color:var(--pink)}
+  .klant .sit{color:var(--muted);line-height:1.4}
+  .klant q{font-style:italic;line-height:1.4}
+  .klant button{margin-top:auto;align-self:flex-start;border:0;background:var(--grey);border-radius:6px;padding:7px 10px;font-weight:700;font-size:13px;cursor:pointer}
+  /* Mail form */
+  .modal{position:fixed;inset:0;z-index:45;background:rgba(10,10,10,.45);display:none;align-items:center;justify-content:center;padding:16px}
+  .modal.open{display:flex}
+  .modal .compose{width:min(620px,100%);max-height:calc(100vh - 32px);overflow:auto;position:relative}
+  .modal select{width:100%;border:1px solid #ccc;border-radius:8px;padding:9px;font:15px Lato,sans-serif;background:#fff}
+  .x{position:absolute;top:12px;right:14px;border:0;background:none;font-size:22px;cursor:pointer;color:#666}
+
   /* Phone */
   .phone-backdrop{position:fixed;inset:0;z-index:40;background:rgba(10,10,10,.45);display:none;align-items:center;justify-content:center;padding:16px}
   .phone-backdrop.open{display:flex}
@@ -141,6 +155,7 @@
       <div class="cta">
         <button class="primary" id="open-chat">💬 Chat met Esmee</button>
         <button class="secondary" id="call">📞 Bel Esmee</button>
+        <button class="secondary" id="mail-btn">✉️ Mail Esmee</button>
       </div>
     </div>
   </section>
@@ -151,6 +166,17 @@
       <button class="card" data-chat><b>Einde salderingsregeling</b><span>Wat betekent 1 januari 2027 voor mijn zonnepanelen?</span></button>
       <button class="card" data-chat><b>Dynamisch contract</b><span>Waarom was mijn maandfactuur hoger?</span></button>
       <button class="card" data-chat><b>Verhuizen en betalen</b><span>Verhuizing doorgeven of een betalingsregeling treffen.</span></button>
+    </div>
+  </section>
+  <section class="quick" id="demo-klanten">
+    <h2>Probeer het met een demo-klant</h2>
+    <p class="sub">Esmee kijkt mee in een nep-klantsysteem met vijf klanten. Noem in de chat of aan de telefoon de postcode en het huisnummer van een van hen, en stel de vraag.</p>
+    <div class="cards">
+      <div class="klant"><b>Mark Jansen</b><span class="code">5612 CJ 44</span><span class="sit">Zonnepanelen, vast contract tot eind maart.</span><q>Wat betekent het einde van salderen voor mij?</q><button data-copy="Wat betekent het einde van salderen voor mij? Mijn postcode en huisnummer: 5612 CJ 44.">Kopieer vraag</button></div>
+      <div class="klant"><b>Sanne de Vries</b><span class="code">3572 BJ 112</span><span class="sit">Variabel contract, gebruikt dit najaar meer gas.</span><q>Moet ik straks bijbetalen? Kan mijn termijnbedrag omhoog?</q><button data-copy="Moet ik straks bijbetalen? Kan mijn termijnbedrag omhoog? Mijn postcode en huisnummer: 3572 BJ 112.">Kopieer vraag</button></div>
+      <div class="klant"><b>Fatima El Amrani</b><span class="code">1074 AL 201</span><span class="sit">Dynamisch contract, warmtepomp en elektrische auto.</span><q>Waarom is mijn rekening in november zo hoog?</q><button data-copy="Waarom is mijn rekening in november zo hoog? Mijn postcode en huisnummer: 1074 AL 201.">Kopieer vraag</button></div>
+      <div class="klant"><b>Peter Bakker</b><span class="code">9711 NT 8</span><span class="sit">Twee termijnen open, tijdelijk krap door ziekte.</span><q>Kan ik mijn achterstand in delen betalen?</q><button data-copy="Kan ik mijn achterstand in delen betalen? Mijn postcode en huisnummer: 9711 NT 8.">Kopieer vraag</button></div>
+      <div class="klant"><b>Ingrid Visser</b><span class="code">2563 AV 310</span><span class="sit">Verhuist op 15 december naar Rotterdam.</span><q>Ik ga verhuizen, hoe neem ik mijn energie mee?</q><button data-copy="Ik ga verhuizen, hoe neem ik mijn energie mee? Mijn postcode en huisnummer: 2563 AV 310.">Kopieer vraag</button></div>
     </div>
   </section>
 </div>
@@ -171,6 +197,21 @@
     <div class="list" id="list"></div>
   </aside>
   <main class="thread" id="thread"><p class="empty">Kies een e-mail links.</p></main>
+</div>
+
+<div class="modal" id="mail-modal" aria-hidden="true">
+  <div class="compose" role="dialog" aria-label="Mail Esmee">
+    <button class="x" id="mail-close" aria-label="Sluiten">×</button>
+    <h2 style="margin:0 0 6px">Mail de klantenservice</h2>
+    <p style="margin:0;color:#6b6b6b;font-size:14px">Esmee beantwoordt je mail. Je ziet het antwoord daarna in de klantenservice-inbox.</p>
+    <label>Voorbeeld</label>
+    <select id="f-seed"><option value="">Eigen mail</option></select>
+    <div class="row2"><div><label>Naam</label><input id="f-name" value="Mark Jansen"></div><div><label>E-mailadres</label><input id="f-email" value="mark.jansen@voorbeeld.nl"></div></div>
+    <label>Onderwerp</label><input id="f-subj">
+    <label>Bericht</label><textarea id="f-body"></textarea>
+    <div class="actions"><button class="btn pink" id="f-send">Versturen</button></div>
+    <p id="f-note" style="font-size:13px;color:#6b6b6b">Demo-klanten (@voorbeeld.nl): mark.jansen, sanne.devries, fatima.elamrani, peter.bakker, ingrid.visser. Een ander adres is een onbekende afzender.</p>
+  </div>
 </div>
 
 <div class="phone-backdrop" id="phone" aria-hidden="true">
@@ -236,6 +277,11 @@
     frame.src = BASE + '/p/' + KEY + '?lang=nl&autostart=1';
     phone.classList.add('open'); phone.setAttribute('aria-hidden', 'false');
   };
+  document.querySelectorAll('[data-copy]').forEach(function (b) { b.onclick = function () {
+    var t = b.getAttribute('data-copy');
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = 'Gekopieerd, plak in de chat'; }, function () { prompt('Kopieer deze vraag:', t); });
+    setTimeout(function () { b.textContent = 'Kopieer vraag'; }, 2500);
+  }; });
   function hangUp() { frame.src = 'about:blank'; phone.classList.remove('open'); phone.setAttribute('aria-hidden', 'true'); }
   document.getElementById('phone-close').onclick = hangUp;
   phone.addEventListener('click', function (e) { if (e.target === phone) hangUp(); });
@@ -292,7 +338,7 @@
       h += '<div class="actions"><button class="btn pink" id="answer">Laat Esmee beantwoorden</button></div>';
     } else if (m.status !== 'busy') {
       var nextIdx = m.thread.filter(function (t) { return t.dir === 'out'; }).length;
-      var nextRec = ONLINE && RECORDED[m.id] && RECORDED[m.id][nextIdx];
+      var nextRec = ONLINE && RECORDED[m.recId || m.id] && RECORDED[m.recId || m.id][nextIdx];
       if (!ONLINE || nextRec) h += '<div class="reply-box"><label style="font-size:13px;font-weight:700">Klant mailt terug</label><textarea id="followup" placeholder="Bijvoorbeeld: Ja, zet mijn termijnbedrag maar op 183 euro.">' + (nextRec ? esc(nextRec.q) : '') + '</textarea><div class="actions"><button class="btn line" id="send-followup">Mail van klant ontvangen</button></div></div>';
     }
     el.innerHTML = h;
@@ -346,7 +392,7 @@
 
   function answerRecorded(m) {
     var idx = m.thread.filter(function (t) { return t.dir === 'out'; }).length;
-    var rec = RECORDED[m.id] && RECORDED[m.id][idx];
+    var rid = m.recId || m.id, rec = RECORDED[rid] && RECORDED[rid][idx];
     if (!rec) { alert('Live e-mail werkt in de lokale demo. Online staan alleen de opgenomen antwoorden van de vijf voorbeeldmails.'); return; }
     m.status = 'busy'; save(); renderList(); renderThread();
     setTimeout(function () {
@@ -370,6 +416,39 @@
   };
 
   if (ONLINE) document.getElementById('online-note').style.display = 'block';
+  // ---------- Mail Esmee (form on the website) ----------
+  var modal = document.getElementById('mail-modal'), seedSel = document.getElementById('f-seed');
+  SEED.forEach(function (m) { var o = document.createElement('option'); o.value = m.id; o.textContent = m.name + ': ' + m.subject; seedSel.appendChild(o); });
+  function fill(id) {
+    var m = SEED.find(function (x) { return x.id === id; });
+    document.getElementById('f-name').value = m ? m.name : '';
+    document.getElementById('f-email').value = m ? m.email : '';
+    document.getElementById('f-subj').value = m ? m.subject : '';
+    document.getElementById('f-body').value = m ? m.body : '';
+  }
+  seedSel.onchange = function () { fill(seedSel.value); };
+  document.getElementById('mail-btn').onclick = function () {
+    try { window.NeopleChat.close(); } catch (e) {}
+    if (ONLINE) {
+      seedSel.querySelector('option[value=""]').disabled = true;
+      if (!seedSel.value) { seedSel.value = 'm3'; fill('m3'); }
+      document.getElementById('f-note').textContent = 'Online kies je een voorbeeldmail en zie je het antwoord dat Esmee in de test gaf. Een eigen mail live laten beantwoorden kan in de demo vanaf Hans\' laptop.';
+      ['f-name','f-email','f-subj','f-body'].forEach(function (i) { document.getElementById(i).readOnly = true; });
+    }
+    modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false');
+  };
+  function closeModal() { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); }
+  document.getElementById('mail-close').onclick = closeModal;
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  document.getElementById('f-send').onclick = function () {
+    var em = document.getElementById('f-email').value.trim(), b = document.getElementById('f-body').value.trim();
+    if (!em || !b) return;
+    var seed = SEED.find(function (x) { return x.id === seedSel.value; });
+    var m = { id: 'f' + Date.now(), recId: seed && b === seed.body ? seed.id : null, name: document.getElementById('f-name').value.trim() || em, email: em,
+      subject: document.getElementById('f-subj').value.trim() || '(geen onderwerp)', status: 'new', thread: [{ dir: 'in', body: b, at: Date.now() }] };
+    state.mails.push(m); save(); closeModal(); selected = m.id; show('desk'); renderList(); renderThread(); answer(m);
+  };
+
   renderList();
   // Resume a reply that was still running when the page was reloaded.
   state.mails.forEach(function (m) { if (m.status === 'busy') { m.status = 'new'; } });
