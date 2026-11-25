@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Essent · Esmee (demo)</title>
+<title>Essent · Freek (demo)</title>
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,10 @@
   .site .mijn{margin-left:auto;color:var(--blue);font-weight:700;font-size:14px}
   .crumbs{padding:12px 32px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--line)}
   .hero{background:var(--pink);color:#fff;padding:56px 32px 64px}
-  .hero-inner{max-width:1080px;margin:0 auto}
+  .hero-inner{max-width:1080px;margin:0 auto;position:relative}
+  .hero{position:relative;overflow:hidden}
+  .hero .erik{position:absolute;right:max(16px,calc(50% - 560px));bottom:0;width:340px;height:auto;pointer-events:none}
+  @media (max-width:900px){.hero .erik{display:none}}
   .hero h1{font-weight:900;font-size:clamp(30px,5vw,48px);letter-spacing:.5px;text-transform:uppercase;margin:0 0 12px}
   .hero p{font-size:19px;max-width:560px;margin:0 0 28px;line-height:1.45}
   .cta{display:flex;gap:12px;flex-wrap:wrap}
@@ -132,7 +135,7 @@
 </head>
 <body>
 <div class="demobar">
-  <span><b>Demo</b> · Esmee, gebouwd door Neople · fictieve klantgegevens</span>
+  <span><b>Demo</b> · Freek, gebouwd door Neople · fictieve klantgegevens</span>
   <div class="tabs" role="group" aria-label="Weergave">
     <button id="tab-site" aria-pressed="true">Website: chat en bellen</button>
     <button id="tab-desk" aria-pressed="false">Klantenservice: e-mail</button>
@@ -155,13 +158,14 @@
   </header>
   <div class="crumbs">Particulier › Klantenservice</div>
   <section class="hero">
+    <img class="erik" src="erik-buste.png" alt="">
     <div class="hero-inner">
       <h1>Hulp nodig?</h1>
-      <p>Esmee, onze digitale collega, kijkt direct mee in je contract, verbruik en rekening. Ook met lastige vragen, dag en nacht.</p>
+      <p>Freek, onze digitale collega, kijkt direct mee in je contract, verbruik en rekening. Ook met lastige vragen, dag en nacht.</p>
       <div class="cta">
-        <button class="primary" id="open-chat">💬 Chat met Esmee</button>
-        <button class="secondary" id="call">📞 Bel Esmee</button>
-        <button class="secondary" id="mail-btn">✉️ Mail Esmee</button>
+        <button class="primary" id="open-chat">💬 Chat met Freek</button>
+        <button class="secondary" id="call">📞 Bel Freek</button>
+        <button class="secondary" id="mail-btn">✉️ Mail Freek</button>
       </div>
     </div>
   </section>
@@ -176,7 +180,7 @@
   </section>
   <section class="quick" id="demo-klanten">
     <h2>Probeer het met een demo-klant</h2>
-    <p class="sub">Esmee kijkt mee in een nep-klantsysteem met vijf klanten. Noem in de chat of aan de telefoon de postcode en het huisnummer van een van hen, en stel de vraag.</p>
+    <p class="sub">Freek kijkt mee in een nep-klantsysteem met vijf klanten. Noem in de chat of aan de telefoon de postcode en het huisnummer van een van hen, en stel de vraag.</p>
     <div class="cards">
       <div class="klant"><b>Mark Jansen</b><span class="code">5612 CJ 44</span><span class="sit">Zonnepanelen, vast contract tot eind maart.</span><q>Wat betekent het einde van salderen voor mij?</q><button data-copy="Wat betekent het einde van salderen voor mij? Mijn postcode en huisnummer: 5612 CJ 44.">Kopieer vraag</button></div>
       <div class="klant"><b>Sanne de Vries</b><span class="code">3572 BJ 112</span><span class="sit">Variabel contract, gebruikt dit najaar meer gas.</span><q>Moet ik straks bijbetalen? Kan mijn termijnbedrag omhoog?</q><button data-copy="Moet ik straks bijbetalen? Kan mijn termijnbedrag omhoog? Mijn postcode en huisnummer: 3572 BJ 112.">Kopieer vraag</button></div>
@@ -194,8 +198,8 @@
       <div class="t"><span id="logo2" style="display:inline-flex"></span> Klantenservice · Inbox</div>
       <small>E-mails aan klantenservice@essent.nl (demo)</small>
       <small id="online-note" style="display:none;color:#a86400">Online versie: de e-mailantwoorden zijn opgenomen in de test van 24 nov. Chat en bellen zijn live.</small>
-      <div class="mode" role="group" aria-label="Hoe Esmee antwoordt">
-        <button id="mode-auto" aria-pressed="true">Esmee verstuurt zelf</button>
+      <div class="mode" role="group" aria-label="Hoe Freek antwoordt">
+        <button id="mode-auto" aria-pressed="true">Freek verstuurt zelf</button>
         <button id="mode-draft" aria-pressed="false">Concept voor collega</button>
       </div>
     </div>
@@ -206,10 +210,10 @@
 </div>
 
 <div class="modal" id="mail-modal" aria-hidden="true">
-  <div class="compose" role="dialog" aria-label="Mail Esmee">
+  <div class="compose" role="dialog" aria-label="Mail Freek">
     <button class="x" id="mail-close" aria-label="Sluiten">×</button>
     <h2 style="margin:0 0 6px">Mail de klantenservice</h2>
-    <p style="margin:0;color:#6b6b6b;font-size:14px">Esmee beantwoordt je mail. Je ziet het antwoord daarna in de klantenservice-inbox.</p>
+    <p style="margin:0;color:#6b6b6b;font-size:14px">Freek beantwoordt je mail. Je ziet het antwoord daarna in de klantenservice-inbox.</p>
     <label>Voorbeeld</label>
     <select id="f-seed"><option value="">Eigen mail</option></select>
     <div class="row2"><div><label>Naam</label><input id="f-name" value="Mark Jansen"></div><div><label>E-mailadres</label><input id="f-email" value="mark.jansen@voorbeeld.nl"></div></div>
@@ -221,20 +225,20 @@
 </div>
 
 <div class="phone-backdrop" id="phone" aria-hidden="true">
-  <div class="phone" role="dialog" aria-label="Bellen met Esmee">
+  <div class="phone" role="dialog" aria-label="Bellen met Freek">
     <button class="phone-close" id="phone-close" aria-label="Ophangen">×</button>
-    <iframe id="phone-frame" title="Bellen met Esmee" allow="microphone; autoplay"></iframe>
+    <iframe id="phone-frame" title="Bellen met Freek" allow="microphone; autoplay"></iframe>
   </div>
 </div>
 
 <script>
   var KEY = 'wk_z3JLGuTDXFaR7dBxC-opGr';
   var BASE = 'https://chat.endpoints.neople-chat.cloud.goog';
-  // Same Esmee and workflow, but the call runs on an ElevenLabs agent (voice Anne) instead of the standard voice.
+  // Same Freek and workflow, but the call runs on an ElevenLabs agent (male voice) instead of the standard voice.
   var KEY_ELEVEN = 'wk_G8Z9KYMKYEjyBU30rCIFAq';
   // The inbox goes through server.py (/nc), because the chat API allows no cross-origin calls from a page.
   var API = '/nc';
-  // Online (GitHub Pages) there is no server.py, so the inbox shows the answers Esmee gave in the test of 24 Nov.
+  // Online (GitHub Pages) there is no server.py, so the inbox shows the answers Freek gave in the test of 24 Nov.
   var ONLINE = !/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
   // Online the inbox talks to Neople Chat directly once it allows this page (CORS); until then it shows recorded answers.
   var RECMODE = ONLINE;
@@ -245,7 +249,7 @@
       var n = document.getElementById('online-note'); if (n) n.style.display = 'none';
     }).catch(function () {});
   }
-  var RECORDED = {"m1": [{"q": "Hallo,\n\nIn de app zie ik dat mijn jaarafrekening in februari waarschijnlijk niet gunstig uitvalt. Hoe kan dat? Ik heb volgens mij niks anders gedaan dan vorig jaar. En kan ik mijn termijnbedrag zo aanpassen dat ik niet in één keer honderden euro's moet betalen?\n\nGroet,\nSanne de Vries", "secs": 24, "a": "Beste Sanne,\n\nIk snap dat het vervelend is om een bijbetaling te verwachten. De prognose is dat je bij de jaarafrekening ongeveer 418 euro moet bijbetalen. Die staat naar verwachting op 10 februari 2027.\n\nJe verbruik ligt hoger dan waarop je termijnbedrag is gebaseerd: de afgelopen 12 maanden gebruikte je 2.950 kWh stroom en 1.420 m³ gas, tegenover 2.600 kWh en 1.050 m³ waarop het termijnbedrag is gebaseerd. Vooral je gasverbruik lag sinds september hoger dan in dezelfde maanden vorig jaar. Ook je stroomverbruik is gestegen. Dat kan gebeuren zonder dat je bewust iets anders doet.\n\nHet advies is om je termijnbedrag te verhogen van 148 naar 183 euro per maand. Dat is 35 euro extra per maand en helpt de verwachte bijbetaling grotendeels te voorkomen. Wil je dat ik je termijnbedrag aanpas naar 183 euro per maand?\n\nMet vriendelijke groet,\nEsmee\nKlantenservice Essent"}, {"q": "Ja graag, zet hem maar op 183 euro.", "secs": 19, "a": "Beste Sanne,\n\nIk heb je termijnbedrag aangepast naar 183 euro per maand. Dit gaat in per de eerstvolgende termijn, in december 2026. Je ontvangt binnen een paar minuten een bevestiging per e-mail.\n\nJe referentie is TB-923117.\n\nMet vriendelijke groet,\nEsmee\nKlantenservice Essent"}], "m2": [{"q": "Goedemiddag,\n\nIk heb een herinnering gekregen voor de termijn van oktober en de volgende komt er ook al aan. Ik zit door ziekte even krap. Kan ik dit in delen betalen? En wordt ons gas nu afgesloten? We hebben twee kleine kinderen thuis.\n\nMet vriendelijke groet,\nPeter Bakker", "secs": 34, "a": "Beste Peter,\n\nWat vervelend dat je door ziekte tijdelijk krap zit. Ik zie dat je op 13 november hierover hebt gebeld.\n\nEr staat 264 euro open: 132 euro voor oktober, vervallen op 28 oktober, en 132 euro voor november, die op 28 november vervalt. Er is een betalingsherinnering verstuurd voor oktober. Er is nog geen aanmaning en je betalingsachterstand is niet overgedragen aan een incassobureau. Zodra we een regeling vastleggen en je de delen betaalt, staan herinneringen en het incassotraject stil.\n\nJe kunt het openstaande bedrag in delen betalen, bovenop je gewone termijnbedrag van 132 euro. Dit zijn twee opties:\n\n- 3 delen: 220 euro per maand, inclusief je gewone termijnbedrag.\n- 6 delen: 176 euro per maand, inclusief je gewone termijnbedrag.\n\nWelke optie past het beste bij je?\n\nMet vriendelijke groet,\nEsmee\nKlantenservice Essent"}, {"q": "Dank je. Doe maar 6 delen.", "secs": 51, "a": "Beste Peter,\n\nIk heb de betalingsregeling voor je vastgelegd. Je betaalt het openstaande bedrag in 6 delen van 44 euro, van december 2026 tot en met mei 2027. Elk deel wordt op de 28e van de maand betaald, samen met je gewone termijnbedrag van 132 euro. Dat is in totaal 176 euro per maand.\n\nEr loopt nu geen aanmaning of incassotraject. Zolang je de delen betaalt, staan herinneringen en het incassotraject stil. Als een deel niet wordt betaald, vervalt de regeling.\n\nJe referentie is BR-137821. Je ontvangt het betaalschema ook per e-mail.\n\nMet vriendelijke groet,\nEsmee\nKlantenservice Essent"}], "m3": [{"q": "Hoi,\n\nTwee vragen. Wat kost het stoppen van salderen mij volgend jaar ongeveer? En mijn vaste contract loopt in maart af: is het slim om nu al over te stappen naar een dynamisch contract, en kost dat me dan een boete?\n\nMark", "secs": 35, "a": "Beste Mark,\n\nVanaf 1 januari 2027 stopt de salderingsregeling. Op basis van je stroomverbruik en teruglevering van de afgelopen 12 maanden schat ik dat dit je ongeveer 535 euro per jaar extra kost. Vanaf 2027 betaal je voor alle stroom die je van het net afneemt en ontvang je een vergoeding voor de stroom die je teruglevert.\n\n- Met salderen: 700 kWh netto afname, ongeveer 185 euro per jaar.\n- Zonder salderen: ongeveer 954 euro voor afname, min ongeveer 232 euro terugleververgoeding.\n- Verschil: ongeveer 535 euro per jaar.\n\nJe jaarafrekeningprognose houdt nog geen rekening met deze verandering. Je termijnbedrag van 96 euro per maand verhogen met ongeveer 45 euro, naar ongeveer 141 euro per maand, kan helpen om dit op te vangen. Laat het me weten als je dat wilt aanpassen.\n\nJe vaste contract loopt van 1 april 2024 tot en met 31 maart 2027. Als je vóór die einddatum overstapt, kan een opzegvergoeding gelden. Het precieze bedrag wordt pas bij opzegging berekend. Per 31 maart 2027 kun je kosteloos overstappen, met een opzegtermijn van 5 werkdagen. Daarna loopt je contract automatisch door voor onbepaalde tijd met variabele tarieven.\n\nOf dynamisch voor jou slim is, hangt onder meer af van wanneer je stroom gebruikt en de actuele tarieven. Het kan interessant zijn als je verbruik kunt verschuiven naar zonnige of goedkopere uren. Voor actuele tarieven kun je kijken op essent.nl. Een collega kan je helpen bij de keuze.\n\nMet vriendelijke groet,\nEsmee\nKlantenservice Essent"}], "m4": [{"q": "Beste Essent,\n\nOp 15 december krijg ik de sleutel van mijn nieuwe huis: Kralingse Plaslaan 18, 3061 BA Rotterdam. Mijn huidige woning houd ik nog tot en met 31 december. Kan ik mijn energie meenemen en wat moet ik doen met de meterstanden?\n\nVriendelijke groet,\nIngrid Visser", "secs": 28, "a": "Beste Ingrid,\n\nJe kunt je energie meenemen naar je nieuwe adres. Ik heb je huidige adres als Laan van Meerdervoort 310, 2563AV Den Haag. Ik begrijp dat de levering daar stopt op 31 december 2026 en op 15 december 2026 start op Kralingse Plaslaan 18, 3061 BA Rotterdam.\n\nKlopt dit? Na je bevestiging geef ik de verhuizing door en krijg je te horen wat je met de meterstanden moet doen.\n\nMet vriendelijke groet,\nEsmee\nKlantenservice Essent"}, {"q": "Klopt helemaal, graag doorvoeren.", "secs": 19, "a": "Beste Ingrid,\n\nIk heb je verhuizing doorgegeven. De levering start op 15 december 2026 op Kralingse Plaslaan 18, 3061 BA Rotterdam en stopt op 31 december 2026 op Laan van Meerdervoort 310, 2563AV Den Haag.\n\nOp beide adressen worden de meterstanden automatisch uitgelezen op de verhuisdatum. Je hoeft ze dus niet door te geven. Je huidige contract en tarieven lopen door op je nieuwe adres. Je termijnbedrag blijft voorlopig gelijk en wordt na twee maanden aangepast op basis van je werkelijke verbruik. De eindafrekening van je oude adres ontvang je binnen zes weken na 31 december.\n\nJe ontvangt ook een bevestiging per e-mail. Het referentienummer van je verhuizing is VH-930254.\n\nMet vriendelijke groet,\nEsmee\nKlantenservice Essent"}], "m5": [{"q": "Hallo,\n\nIk heb een dynamisch contract en zie in de app dat november al bijna twee keer zo duur is als september. Hoe kan dat en wat kan ik doen om het omlaag te krijgen? Ik heb een warmtepomp en laad mijn auto thuis.\n\nFatima", "secs": 35, "a": "Beste Fatima,\n\nJe novemberbedrag is hoger door zowel meer verbruik als een hogere gemiddelde stroomprijs. Tot en met 23 november heb je 742 kWh verbruikt, tegenover 455 kWh in heel september. De gemiddelde prijs was 0,312 euro per kWh, tegenover 0,241 euro in september. Het is dus geen vergelijking van twee volledige maanden.\n\nTot en met 23 november staat er 231,50 euro op je rekening. De verwachting is dat november uitkomt op ongeveer 298 euro. De koudste weken tot nu toe spelen mee: je warmtepomp draait daardoor meer. Ook was 64% van je laden tussen 17.00 en 21.00 uur, toen de uurprijzen op 18 en 19 november boven 0,55 euro per kWh lagen.\n\nJe kunt proberen je auto vaker ’s nachts te laden. In november was de gemiddelde prijs tussen 01.00 en 06.00 uur 0,21 euro per kWh. De uurprijzen voor morgen vind je elke middag in de Essent-app; zo kun je het laden plannen op goedkopere uren.\n\nMet vriendelijke groet,\nEsmee\nKlantenservice Essent"}]};
+  var RECORDED = {"m1": [{"q": "Hallo,\n\nIn de app zie ik dat mijn jaarafrekening in februari waarschijnlijk niet gunstig uitvalt. Hoe kan dat? Ik heb volgens mij niks anders gedaan dan vorig jaar. En kan ik mijn termijnbedrag zo aanpassen dat ik niet in één keer honderden euro's moet betalen?\n\nGroet,\nSanne de Vries", "secs": 24, "a": "Beste Sanne,\n\nIk snap dat het vervelend is om een bijbetaling te verwachten. De prognose is dat je bij de jaarafrekening ongeveer 418 euro moet bijbetalen. Die staat naar verwachting op 10 februari 2027.\n\nJe verbruik ligt hoger dan waarop je termijnbedrag is gebaseerd: de afgelopen 12 maanden gebruikte je 2.950 kWh stroom en 1.420 m³ gas, tegenover 2.600 kWh en 1.050 m³ waarop het termijnbedrag is gebaseerd. Vooral je gasverbruik lag sinds september hoger dan in dezelfde maanden vorig jaar. Ook je stroomverbruik is gestegen. Dat kan gebeuren zonder dat je bewust iets anders doet.\n\nHet advies is om je termijnbedrag te verhogen van 148 naar 183 euro per maand. Dat is 35 euro extra per maand en helpt de verwachte bijbetaling grotendeels te voorkomen. Wil je dat ik je termijnbedrag aanpas naar 183 euro per maand?\n\nMet vriendelijke groet,\nFreek\nKlantenservice Essent"}, {"q": "Ja graag, zet hem maar op 183 euro.", "secs": 19, "a": "Beste Sanne,\n\nIk heb je termijnbedrag aangepast naar 183 euro per maand. Dit gaat in per de eerstvolgende termijn, in december 2026. Je ontvangt binnen een paar minuten een bevestiging per e-mail.\n\nJe referentie is TB-923117.\n\nMet vriendelijke groet,\nFreek\nKlantenservice Essent"}], "m2": [{"q": "Goedemiddag,\n\nIk heb een herinnering gekregen voor de termijn van oktober en de volgende komt er ook al aan. Ik zit door ziekte even krap. Kan ik dit in delen betalen? En wordt ons gas nu afgesloten? We hebben twee kleine kinderen thuis.\n\nMet vriendelijke groet,\nPeter Bakker", "secs": 34, "a": "Beste Peter,\n\nWat vervelend dat je door ziekte tijdelijk krap zit. Ik zie dat je op 13 november hierover hebt gebeld.\n\nEr staat 264 euro open: 132 euro voor oktober, vervallen op 28 oktober, en 132 euro voor november, die op 28 november vervalt. Er is een betalingsherinnering verstuurd voor oktober. Er is nog geen aanmaning en je betalingsachterstand is niet overgedragen aan een incassobureau. Zodra we een regeling vastleggen en je de delen betaalt, staan herinneringen en het incassotraject stil.\n\nJe kunt het openstaande bedrag in delen betalen, bovenop je gewone termijnbedrag van 132 euro. Dit zijn twee opties:\n\n- 3 delen: 220 euro per maand, inclusief je gewone termijnbedrag.\n- 6 delen: 176 euro per maand, inclusief je gewone termijnbedrag.\n\nWelke optie past het beste bij je?\n\nMet vriendelijke groet,\nFreek\nKlantenservice Essent"}, {"q": "Dank je. Doe maar 6 delen.", "secs": 51, "a": "Beste Peter,\n\nIk heb de betalingsregeling voor je vastgelegd. Je betaalt het openstaande bedrag in 6 delen van 44 euro, van december 2026 tot en met mei 2027. Elk deel wordt op de 28e van de maand betaald, samen met je gewone termijnbedrag van 132 euro. Dat is in totaal 176 euro per maand.\n\nEr loopt nu geen aanmaning of incassotraject. Zolang je de delen betaalt, staan herinneringen en het incassotraject stil. Als een deel niet wordt betaald, vervalt de regeling.\n\nJe referentie is BR-137821. Je ontvangt het betaalschema ook per e-mail.\n\nMet vriendelijke groet,\nFreek\nKlantenservice Essent"}], "m3": [{"q": "Hoi,\n\nTwee vragen. Wat kost het stoppen van salderen mij volgend jaar ongeveer? En mijn vaste contract loopt in maart af: is het slim om nu al over te stappen naar een dynamisch contract, en kost dat me dan een boete?\n\nMark", "secs": 35, "a": "Beste Mark,\n\nVanaf 1 januari 2027 stopt de salderingsregeling. Op basis van je stroomverbruik en teruglevering van de afgelopen 12 maanden schat ik dat dit je ongeveer 535 euro per jaar extra kost. Vanaf 2027 betaal je voor alle stroom die je van het net afneemt en ontvang je een vergoeding voor de stroom die je teruglevert.\n\n- Met salderen: 700 kWh netto afname, ongeveer 185 euro per jaar.\n- Zonder salderen: ongeveer 954 euro voor afname, min ongeveer 232 euro terugleververgoeding.\n- Verschil: ongeveer 535 euro per jaar.\n\nJe jaarafrekeningprognose houdt nog geen rekening met deze verandering. Je termijnbedrag van 96 euro per maand verhogen met ongeveer 45 euro, naar ongeveer 141 euro per maand, kan helpen om dit op te vangen. Laat het me weten als je dat wilt aanpassen.\n\nJe vaste contract loopt van 1 april 2024 tot en met 31 maart 2027. Als je vóór die einddatum overstapt, kan een opzegvergoeding gelden. Het precieze bedrag wordt pas bij opzegging berekend. Per 31 maart 2027 kun je kosteloos overstappen, met een opzegtermijn van 5 werkdagen. Daarna loopt je contract automatisch door voor onbepaalde tijd met variabele tarieven.\n\nOf dynamisch voor jou slim is, hangt onder meer af van wanneer je stroom gebruikt en de actuele tarieven. Het kan interessant zijn als je verbruik kunt verschuiven naar zonnige of goedkopere uren. Voor actuele tarieven kun je kijken op essent.nl. Een collega kan je helpen bij de keuze.\n\nMet vriendelijke groet,\nFreek\nKlantenservice Essent"}], "m4": [{"q": "Beste Essent,\n\nOp 15 december krijg ik de sleutel van mijn nieuwe huis: Kralingse Plaslaan 18, 3061 BA Rotterdam. Mijn huidige woning houd ik nog tot en met 31 december. Kan ik mijn energie meenemen en wat moet ik doen met de meterstanden?\n\nVriendelijke groet,\nIngrid Visser", "secs": 28, "a": "Beste Ingrid,\n\nJe kunt je energie meenemen naar je nieuwe adres. Ik heb je huidige adres als Laan van Meerdervoort 310, 2563AV Den Haag. Ik begrijp dat de levering daar stopt op 31 december 2026 en op 15 december 2026 start op Kralingse Plaslaan 18, 3061 BA Rotterdam.\n\nKlopt dit? Na je bevestiging geef ik de verhuizing door en krijg je te horen wat je met de meterstanden moet doen.\n\nMet vriendelijke groet,\nFreek\nKlantenservice Essent"}, {"q": "Klopt helemaal, graag doorvoeren.", "secs": 19, "a": "Beste Ingrid,\n\nIk heb je verhuizing doorgegeven. De levering start op 15 december 2026 op Kralingse Plaslaan 18, 3061 BA Rotterdam en stopt op 31 december 2026 op Laan van Meerdervoort 310, 2563AV Den Haag.\n\nOp beide adressen worden de meterstanden automatisch uitgelezen op de verhuisdatum. Je hoeft ze dus niet door te geven. Je huidige contract en tarieven lopen door op je nieuwe adres. Je termijnbedrag blijft voorlopig gelijk en wordt na twee maanden aangepast op basis van je werkelijke verbruik. De eindafrekening van je oude adres ontvang je binnen zes weken na 31 december.\n\nJe ontvangt ook een bevestiging per e-mail. Het referentienummer van je verhuizing is VH-930254.\n\nMet vriendelijke groet,\nFreek\nKlantenservice Essent"}], "m5": [{"q": "Hallo,\n\nIk heb een dynamisch contract en zie in de app dat november al bijna twee keer zo duur is als september. Hoe kan dat en wat kan ik doen om het omlaag te krijgen? Ik heb een warmtepomp en laad mijn auto thuis.\n\nFatima", "secs": 35, "a": "Beste Fatima,\n\nJe novemberbedrag is hoger door zowel meer verbruik als een hogere gemiddelde stroomprijs. Tot en met 23 november heb je 742 kWh verbruikt, tegenover 455 kWh in heel september. De gemiddelde prijs was 0,312 euro per kWh, tegenover 0,241 euro in september. Het is dus geen vergelijking van twee volledige maanden.\n\nTot en met 23 november staat er 231,50 euro op je rekening. De verwachting is dat november uitkomt op ongeveer 298 euro. De koudste weken tot nu toe spelen mee: je warmtepomp draait daardoor meer. Ook was 64% van je laden tussen 17.00 en 21.00 uur, toen de uurprijzen op 18 en 19 november boven 0,55 euro per kWh lagen.\n\nJe kunt proberen je auto vaker ’s nachts te laden. In november was de gemiddelde prijs tussen 01.00 en 06.00 uur 0,21 euro per kWh. De uurprijzen voor morgen vind je elke middag in de Essent-app; zo kun je het laden plannen op goedkopere uren.\n\nMet vriendelijke groet,\nFreek\nKlantenservice Essent"}]};
   var LOGO = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.727 27" style="height:100%;width:auto;display:block" aria-label="essent"><path fill="currentColor" d="M48.431 10.958c-.12.931.274 1.577 2.134 2.54l2.725 1.345c2.685 1.333 3.753 3.083 3.452 5.644C56.291 24.686 54.252 27 47.2 27a28.115 28.115 0 0 1-6.99-.954l.568-3.23c2.29.535 3.811.84 5.612.84 2.614 0 3.592-.759 3.794-2.513.068-.592-.199-1.46-1.46-2.154l-2.835-1.453c-3.135-1.539-3.802-3.776-3.447-6.125.61-4.03 3.73-5.927 9.379-5.927 1.683 0 3.058.181 5.658.793l-.566 3.166a19.44 19.44 0 0 0-4.607-.662c-2.57-.001-3.692.769-3.875 2.177zM33.41 8.78a19.44 19.44 0 0 1 4.607.662l.566-3.166c-2.6-.611-3.975-.793-5.658-.793-5.649 0-8.769 1.897-9.379 5.927-.355 2.349.311 4.587 3.447 6.125l2.835 1.453c1.261.694 1.528 1.561 1.46 2.154-.202 1.754-1.18 2.513-3.794 2.513-1.801 0-3.322-.306-5.612-.84l-.567 3.23c2.281.61 4.629.931 6.99.954 7.052 0 9.092-2.314 9.542-6.513.302-2.561-.766-4.311-3.452-5.644l-2.725-1.345c-1.861-.963-2.255-1.609-2.134-2.54.182-1.407 1.304-2.177 3.874-2.177zm83.083.386h5.675l.559-3.31h-5.658L118.112 0a20.628 20.628 0 0 0-6.099 1.196l-.798 4.663h-2.616l-.547 3.307h2.597l-1.974 11.541c-.81 4.595.574 6.293 5.195 6.293 1.24 0 2.487-.242 5.725-1.05l.566-3.225a16.66 16.66 0 0 1-2.811.239c-2.45 0-3.153-.767-2.73-3.15l1.873-10.648zM96.219 5.483a26.397 26.397 0 0 0-10.238 2.222L82.623 26.53h5.798l3.105-17.372a13.12 13.12 0 0 1 3.206-.391c2.919 0 3.57 1.585 2.983 4.9L95.453 26.53h5.795l2.356-13.382c1.049-5.941-.903-7.665-7.385-7.665zm-16.42 5.629c.2 1.369-.071 3.434-.74 6.193H66.385c-.75 4.267.764 5.873 5.566 5.873a20.986 20.986 0 0 0 5.804-.815l-.53 3.016C74.332 26.382 72.287 27 68.956 27c-6.52 0-9.437-3.662-8.252-10.378C61.923 9.706 66.43 5.483 72.549 5.483c4.282 0 6.781 1.93 7.25 5.629zm-7.852-2.493c-2.598 0-4.14 1.688-4.989 5.432h7.162c.911-4.023.351-5.432-2.173-5.432zm-52.593 2.493c.2 1.369-.071 3.434-.74 6.193H5.94c-.75 4.267.764 5.873 5.566 5.873a20.986 20.986 0 0 0 5.804-.815l-.53 3.016C13.886 26.382 11.842 27 8.511 27 1.991 27-.926 23.338.259 16.622 1.478 9.706 5.984 5.483 12.103 5.483c4.283 0 6.782 1.93 7.251 5.629zm-7.852-2.493c-2.598 0-4.14 1.688-4.989 5.432h7.162c.911-4.023.351-5.432-2.173-5.432z"/></svg>';
   document.getElementById('logo1').innerHTML = LOGO;
   document.getElementById('logo2').innerHTML = LOGO;
@@ -332,7 +336,7 @@
   function save() { try { localStorage.setItem('essentDemoInbox', JSON.stringify(state)); } catch (e) {} }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function time(t) { var d = new Date(t); return d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' }) + ' ' + d.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }); }
-  var PILL = { new: ['new', 'Nieuw'], busy: ['busy', 'Esmee schrijft…'], done: ['done', 'Beantwoord'], draft: ['draft', 'Concept klaar'] };
+  var PILL = { new: ['new', 'Nieuw'], busy: ['busy', 'Freek schrijft…'], done: ['done', 'Beantwoord'], draft: ['draft', 'Concept klaar'] };
 
   function renderList() {
     var el = document.getElementById('list'); el.innerHTML = '';
@@ -351,15 +355,15 @@
     var h = '<div class="thead"><h2>' + esc(m.subject) + '</h2><div class="meta">' + esc(m.name) + ' &lt;' + esc(m.email) + '&gt;</div></div>';
     m.thread.forEach(function (t, i) {
       var cls = t.dir === 'in' ? 'mail' : (t.draft ? 'mail draft' : 'mail out');
-      var who = t.dir === 'in' ? '<b>' + esc(m.name) + '</b>' : '<b>Esmee</b> · Klantenservice Essent' + (t.draft ? ' · <b>concept</b>' : '') + (t.secs ? ' · antwoord in ' + t.secs + ' s' : '') + (t.recorded ? ' · opgenomen in de test van 24 nov' : '');
+      var who = t.dir === 'in' ? '<b>' + esc(m.name) + '</b>' : '<b>Freek</b> · Klantenservice Essent' + (t.draft ? ' · <b>concept</b>' : '') + (t.secs ? ' · antwoord in ' + t.secs + ' s' : '') + (t.recorded ? ' · opgenomen in de test van 24 nov' : '');
       h += '<div class="' + cls + '"><div class="mh"><span>' + who + '</span><span>' + time(t.at) + '</span></div><div class="body" id="b' + i + '">' + esc(t.body) + '</div>';
       if (t.draft) h += '<div class="actions"><button class="btn pink" data-send="' + i + '">Versturen</button><button class="btn line" data-edit="' + i + '">Aanpassen</button></div>';
       h += '</div>';
     });
-    if (m.status === 'busy') h += '<div class="working"><span class="dot"></span>Esmee zoekt de klant op en schrijft een antwoord… <span id="secs"></span></div>';
+    if (m.status === 'busy') h += '<div class="working"><span class="dot"></span>Freek zoekt de klant op en schrijft een antwoord… <span id="secs"></span></div>';
     var lastDir = m.thread[m.thread.length - 1].dir;
     if (m.status === 'new' || (lastDir === 'in' && m.status !== 'busy')) {
-      h += '<div class="actions"><button class="btn pink" id="answer">Laat Esmee beantwoorden</button></div>';
+      h += '<div class="actions"><button class="btn pink" id="answer">Laat Freek beantwoorden</button></div>';
     } else if (m.status !== 'busy') {
       var nextIdx = m.thread.filter(function (t) { return t.dir === 'out'; }).length;
       var nextRec = RECMODE && RECORDED[m.recId || m.id] && RECORDED[m.recId || m.id][nextIdx];
@@ -409,7 +413,7 @@
       m.thread.push({ dir: 'out', body: reply, at: Date.now(), draft: draft, secs: Math.round((Date.now() - t0) / 1000) });
       m.status = draft ? 'draft' : 'done';
     } catch (e) {
-      m.status = 'new'; alert('Esmee kon niet antwoorden: ' + e.message);
+      m.status = 'new'; alert('Freek kon niet antwoorden: ' + e.message);
     }
     clearInterval(tick); save(); renderList(); if (selected === m.id) renderThread();
   }
@@ -440,7 +444,7 @@
   };
 
   if (RECMODE) document.getElementById('online-note').style.display = 'block';
-  // ---------- Mail Esmee (form on the website) ----------
+  // ---------- Mail Freek (form on the website) ----------
   var modal = document.getElementById('mail-modal'), seedSel = document.getElementById('f-seed');
   SEED.forEach(function (m) { var o = document.createElement('option'); o.value = m.id; o.textContent = m.name + ': ' + m.subject; seedSel.appendChild(o); });
   function fill(id) {
@@ -456,7 +460,7 @@
     if (RECMODE) {
       seedSel.querySelector('option[value=""]').disabled = true;
       if (!seedSel.value) { seedSel.value = 'm3'; fill('m3'); }
-      document.getElementById('f-note').textContent = 'Online kies je een voorbeeldmail en zie je het antwoord dat Esmee in de test gaf. Een eigen mail live laten beantwoorden kan in de demo vanaf Hans\' laptop.';
+      document.getElementById('f-note').textContent = 'Online kies je een voorbeeldmail en zie je het antwoord dat Freek in de test gaf. Een eigen mail live laten beantwoorden kan in de demo vanaf Hans\' laptop.';
       ['f-name','f-email','f-subj','f-body'].forEach(function (i) { document.getElementById(i).readOnly = true; });
     }
     modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false');
