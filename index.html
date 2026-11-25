@@ -137,6 +137,12 @@
     <button id="tab-site" aria-pressed="true">Website: chat en bellen</button>
     <button id="tab-desk" aria-pressed="false">Klantenservice: e-mail</button>
   </div>
+  <label style="display:flex;align-items:center;gap:6px">Stem bellen
+    <select id="stem" style="border-radius:8px;border:0;padding:6px 8px;font:700 13px Lato,sans-serif">
+      <option value="std">Standaard</option>
+      <option value="eleven">ElevenLabs</option>
+    </select>
+  </label>
   <button class="ghost" id="reset">Opnieuw beginnen</button>
 </div>
 
@@ -224,6 +230,8 @@
 <script>
   var KEY = 'wk_z3JLGuTDXFaR7dBxC-opGr';
   var BASE = 'https://chat.endpoints.neople-chat.cloud.goog';
+  // Same Esmee and workflow, but the call runs on an ElevenLabs agent (voice Anne) instead of the standard voice.
+  var KEY_ELEVEN = 'wk_G8Z9KYMKYEjyBU30rCIFAq';
   // The inbox goes through server.py (/nc), because the chat API allows no cross-origin calls from a page.
   var API = '/nc';
   // Online (GitHub Pages) there is no server.py, so the inbox shows the answers Esmee gave in the test of 24 Nov.
@@ -270,6 +278,12 @@
     try { localStorage.setItem('essentDemoView', view); } catch (e) {}
     document.documentElement.classList.toggle('mailmode', !site);
   }
+  (function () {
+    var sel = document.getElementById('stem');
+    try { sel.value = localStorage.getItem('essentDemoStem') || 'std'; } catch (e) {}
+    if (new URL(location.href).searchParams.get('stem') === 'eleven') sel.value = 'eleven';
+    sel.onchange = function () { try { localStorage.setItem('essentDemoStem', sel.value); } catch (e) {} };
+  })();
   document.getElementById('tab-site').onclick = function () { show('site'); };
   document.getElementById('tab-desk').onclick = function () { show('desk'); };
   document.getElementById('reset').onclick = function () {
@@ -283,7 +297,8 @@
   var phone = document.getElementById('phone'), frame = document.getElementById('phone-frame');
   document.getElementById('call').onclick = function () {
     try { window.NeopleChat.close(); } catch (e) {}
-    frame.src = BASE + '/p/' + KEY + '?lang=nl&autostart=1';
+    var eleven = document.getElementById('stem').value === 'eleven';
+    frame.src = BASE + '/p/' + (eleven ? KEY_ELEVEN : KEY) + '?lang=nl&autostart=1';
     phone.classList.add('open'); phone.setAttribute('aria-hidden', 'false');
   };
   document.querySelectorAll('[data-copy]').forEach(function (b) { b.onclick = function () {
