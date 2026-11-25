@@ -16,7 +16,7 @@
   button{font-family:inherit}
 
   /* The chat widget belongs to the website view, not to the contact center */
-  html.mailmode neople-chat{display:none!important}
+  html.mailmode neople-chat,html.mailmode neople-chat-label{display:none!important}
 
   /* Demo bar */
   .demobar{position:sticky;top:0;z-index:30;background:#111;color:#fff;display:flex;align-items:center;gap:14px;padding:8px 16px;font-size:13px;flex-wrap:wrap}
@@ -93,7 +93,7 @@
   .item .from{font-weight:700}
   .item .subj{font-size:14px;margin-top:2px}
   .item .prev{font-size:13px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .pill{font-size:11px;font-weight:900;border-radius:20px;padding:2px 8px;white-space:nowrap}
+  .pill{font-size:11px;font-weight:900;border-radius:20px;padding:2px 8px;white-space:nowrap;flex-shrink:0;align-self:flex-start}
   .pill.new{background:#e8eefc;color:var(--blue)}
   .pill.busy{background:#fff3e0;color:var(--warn)}
   .pill.done{background:#e6f4ec;color:var(--ok)}
@@ -131,6 +131,50 @@
     .thread{padding:16px}
     .row2{grid-template-columns:1fr}
   }
+
+  /* Cockpit: the advisor's screen. Same work queue as the inbox, Freek always as a suggestion, customer card and "Vraag Freek" on the right. */
+  .cockpit-only{display:none}
+  html.cockpit .cockpit-only{display:inline}
+  html.cockpit .inbox-only{display:none}
+  html.cockpit .desk{grid-template-columns:290px minmax(0,1fr) 400px;background:#eef1f5}
+  html.cockpit .desk-side{background:#1f2a44;color:#fff;border-right:0}
+  html.cockpit .desk-head{border-color:#2f3b57}
+  html.cockpit .desk-head .t svg{color:#fff}
+  html.cockpit .desk-head small{color:#aeb8cc}
+  html.cockpit .item{border-color:#2f3b57}
+  html.cockpit .item:hover{background:#26324f}
+  html.cockpit .item.sel{background:#2d3a5c;box-shadow:inset 3px 0 0 var(--pink)}
+  html.cockpit .item .prev{color:#aeb8cc}
+  html.cockpit .mode,html.cockpit .newmail,html.cockpit #online-note{display:none!important}
+  .chan{font-size:10px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;color:#aeb8cc;margin-right:6px}
+  .cp-side{display:none;border-left:1px solid var(--line);background:#fff;flex-direction:column;min-height:0}
+  html.cockpit .cp-side{display:flex}
+  .kk{padding:16px 18px;border-bottom:1px solid var(--line);overflow:auto;max-height:48%}
+  .kk .lbl{font-size:11px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
+  .kk h3{margin:2px 0 0;font-size:18px}
+  .kk .kn{color:var(--muted);font-size:12px;margin:2px 0 10px}
+  .kk dl{display:grid;grid-template-columns:110px 1fr;gap:5px 10px;margin:0;font-size:13px;line-height:1.35}
+  .kk dt{color:var(--muted)}
+  .kk dd{margin:0}
+  .kk .warn{color:#b00020;font-weight:700}
+  .kk .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .chip{border:1px solid #ccd3df;background:#f7f9fc;border-radius:16px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer;color:var(--ink)}
+  .chip:hover{border-color:var(--pink)}
+  .ask{display:flex;flex-direction:column;min-height:0;flex:1}
+  .ask-head{padding:12px 18px 6px;display:flex;align-items:center;gap:10px;font-weight:900}
+  .ask-head img{width:32px;height:32px;border-radius:50%;object-fit:cover;background:#fdebef}
+  .ask-head small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+  .ask-log{flex:1;overflow:auto;padding:6px 18px 10px;display:flex;flex-direction:column;gap:8px;min-height:120px}
+  .bub{max-width:94%;padding:9px 12px;border-radius:12px;font-size:14px;line-height:1.45;white-space:pre-wrap}
+  .bub.me{align-self:flex-end;background:#1f2a44;color:#fff;border-bottom-right-radius:4px}
+  .bub.fr{align-self:flex-start;background:#f2f4f8;border-bottom-left-radius:4px}
+  .bub.wait{color:var(--warn);font-weight:700;background:#fff8ec}
+  .ask-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 8px}
+  .ask-in{display:flex;gap:6px;padding:10px 12px;border-top:1px solid var(--line)}
+  .ask-in textarea{flex:1;border:1px solid #ccc;border-radius:8px;padding:8px;font:14px Lato,sans-serif;resize:none;height:46px}
+  .sugg{font-size:11px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;color:#7a5d00;margin-bottom:8px}
+  @media (max-width:1150px){html.cockpit .desk{grid-template-columns:260px minmax(0,1fr);height:auto;min-height:calc(100vh - 44px)} html.cockpit .cp-side{grid-column:1/-1;border-left:0;border-top:1px solid var(--line)} .kk{max-height:none}}
+  @media (max-width:760px){html.cockpit .desk{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -139,6 +183,7 @@
   <div class="tabs" role="group" aria-label="Weergave">
     <button id="tab-site" aria-pressed="true">Website: chat en bellen</button>
     <button id="tab-desk" aria-pressed="false">Klantenservice: e-mail</button>
+    <button id="tab-cockpit" aria-pressed="false">Adviseur: Cockpit</button>
   </div>
   <button class="ghost" id="reset">Opnieuw beginnen</button>
 </div>
@@ -189,8 +234,9 @@
 <div class="desk" id="view-desk">
   <aside class="desk-side">
     <div class="desk-head">
-      <div class="t"><span id="logo2" style="display:inline-flex"></span> Klantenservice · Inbox</div>
-      <small>E-mails aan klantenservice@essent.nl (demo)</small>
+      <div class="t"><span id="logo2" style="display:inline-flex"></span> <span class="inbox-only">Klantenservice · Inbox</span><span class="cockpit-only">Cockpit · Werkvoorraad</span></div>
+      <small class="inbox-only">E-mails aan klantenservice@essent.nl (demo)</small>
+      <small class="cockpit-only">Freek zet bij elk contact een voorstel klaar. Demo-weergave, niet de echte Cockpit.</small>
       <small id="online-note" style="display:none;color:#a86400">Online versie: de e-mailantwoorden zijn opgenomen in de test van 24 nov. Chat en bellen zijn live.</small>
       <div class="mode" role="group" aria-label="Hoe Freek antwoordt">
         <button id="mode-auto" aria-pressed="true">Freek verstuurt zelf</button>
@@ -201,6 +247,7 @@
     <div class="list" id="list"></div>
   </aside>
   <main class="thread" id="thread"><p class="empty">Kies een e-mail links.</p></main>
+  <aside class="cp-side" id="cp-side"></aside>
 </div>
 
 <div class="modal" id="mail-modal" aria-hidden="true">
@@ -250,7 +297,7 @@
   (function () {
     var u = new URL(location.href);
     if (u.searchParams.get('nieuw') === '1') {
-      try { Object.keys(localStorage).forEach(function (k) { if (k.indexOf('nc') === 0 || k === 'essentDemoInbox') localStorage.removeItem(k); }); } catch (e) {}
+      try { Object.keys(localStorage).forEach(function (k) { if (k.indexOf('nc') === 0 || k === 'essentDemoInbox' || k === 'essentDemoAsk') localStorage.removeItem(k); }); } catch (e) {}
       try { sessionStorage.clear(); } catch (e) {}
       u.searchParams.delete('nieuw');
       history.replaceState(null, '', u);
@@ -264,18 +311,24 @@
 <script src="https://chat.endpoints.neople-chat.cloud.goog/v1/widget.js" data-widget="wk_z3JLGuTDXFaR7dBxC-opGr" data-language="nl" async></script>
 <script>
   // ---------- Views ----------
+  var cockpit = false, inboxMode = 'auto';
   function show(view) {
     var site = view === 'site';
+    cockpit = view === 'cockpit';
     document.getElementById('view-site').style.display = site ? '' : 'none';
     document.getElementById('view-desk').classList.toggle('on', !site);
     document.getElementById('tab-site').setAttribute('aria-pressed', site);
-    document.getElementById('tab-desk').setAttribute('aria-pressed', !site);
+    document.getElementById('tab-desk').setAttribute('aria-pressed', view === 'desk');
+    document.getElementById('tab-cockpit').setAttribute('aria-pressed', cockpit);
+    document.documentElement.classList.toggle('cockpit', cockpit);
+    if (typeof renderList === 'function') { mode = cockpit ? 'draft' : inboxMode; renderList(); renderThread(); }
     try { if (!site) window.NeopleChat.close(); } catch (e) {}
     try { localStorage.setItem('essentDemoView', view); } catch (e) {}
     document.documentElement.classList.toggle('mailmode', !site);
   }
   document.getElementById('tab-site').onclick = function () { show('site'); };
   document.getElementById('tab-desk').onclick = function () { show('desk'); };
+  document.getElementById('tab-cockpit').onclick = function () { show('cockpit'); };
   document.getElementById('reset').onclick = function () {
     try { window.NeopleChat.shutdown(); } catch (e) {}
     setTimeout(function () { var u = new URL(location.href); u.searchParams.set('nieuw', '1'); location.assign(u); }, 300);
@@ -339,27 +392,28 @@
     state.mails.slice().reverse().forEach(function (m) {
       var last = m.thread[m.thread.length - 1], p = PILL[m.status];
       var d = document.createElement('div'); d.className = 'item' + (m.id === selected ? ' sel' : '');
-      d.innerHTML = '<div class="r1"><span class="from">' + esc(m.name) + '</span><span class="pill ' + p[0] + '">' + p[1] + '</span></div>' +
+      d.innerHTML = '<div class="r1"><span class="from">' + (cockpit ? '<span class="chan">E-mail</span>' : '') + esc(m.name) + '</span><span class="pill ' + p[0] + '">' + p[1] + '</span></div>' +
         '<div class="subj">' + esc(m.subject) + '</div><div class="prev">' + esc(last.body.replace(/\s+/g, ' ')) + '</div>';
-      d.onclick = function () { selected = m.id; renderList(); renderThread(); };
+      d.onclick = function () { selected = m.id; renderList(); renderThread(); if (cockpit && m.status === 'new') answer(m); };
       el.appendChild(d);
     });
   }
   function renderThread() {
     var el = document.getElementById('thread'), m = state.mails.find(function (x) { return x.id === selected; });
-    if (!m) { el.innerHTML = '<p class="empty">Kies een e-mail links.</p>'; return; }
+    renderSide(m);
+    if (!m) { el.innerHTML = '<p class="empty">' + (cockpit ? 'Kies een contact uit de werkvoorraad.' : 'Kies een e-mail links.') + '</p>'; return; }
     var h = '<div class="thead"><h2>' + esc(m.subject) + '</h2><div class="meta">' + esc(m.name) + ' &lt;' + esc(m.email) + '&gt;</div></div>';
     m.thread.forEach(function (t, i) {
       var cls = t.dir === 'in' ? 'mail' : (t.draft ? 'mail draft' : 'mail out');
       var who = t.dir === 'in' ? '<b>' + esc(m.name) + '</b>' : '<b>Freek</b> · Klantenservice Essent' + (t.draft ? ' · <b>concept</b>' : '') + (t.secs ? ' · antwoord in ' + t.secs + ' s' : '') + (t.recorded ? ' · opgenomen in de test van 24 nov' : '');
-      h += '<div class="' + cls + '"><div class="mh"><span>' + who + '</span><span>' + time(t.at) + '</span></div><div class="body" id="b' + i + '">' + esc(t.body) + '</div>';
+      h += '<div class="' + cls + '">' + (t.draft && cockpit ? '<div class="sugg">Freek stelt voor</div>' : '') + '<div class="mh"><span>' + who + '</span><span>' + time(t.at) + '</span></div><div class="body" id="b' + i + '">' + esc(t.body) + '</div>';
       if (t.draft) h += '<div class="actions"><button class="btn pink" data-send="' + i + '">Versturen</button><button class="btn line" data-edit="' + i + '">Aanpassen</button></div>';
       h += '</div>';
     });
-    if (m.status === 'busy') h += '<div class="working"><span class="dot"></span>Freek zoekt de klant op en schrijft een antwoord… <span id="secs"></span></div>';
+    if (m.status === 'busy') h += '<div class="working"><span class="dot"></span>' + (cockpit ? 'Freek zoekt de klant op en maakt een voorstel… ' : 'Freek zoekt de klant op en schrijft een antwoord… ') + '<span id="secs"></span></div>';
     var lastDir = m.thread[m.thread.length - 1].dir;
     if (m.status === 'new' || (lastDir === 'in' && m.status !== 'busy')) {
-      h += '<div class="actions"><button class="btn pink" id="answer">Laat Freek beantwoorden</button></div>';
+      h += '<div class="actions"><button class="btn pink" id="answer">' + (cockpit ? 'Freek: maak een voorstel' : 'Laat Freek beantwoorden') + '</button></div>';
     } else if (m.status !== 'busy') {
       var nextIdx = m.thread.filter(function (t) { return t.dir === 'out'; }).length;
       var nextRec = RECMODE && RECORDED[m.recId || m.id] && RECORDED[m.recId || m.id][nextIdx];
@@ -425,8 +479,8 @@
       m.status = draft ? 'draft' : 'done'; save(); renderList(); if (selected === m.id) renderThread();
     }, 2500);
   }
-  document.getElementById('mode-auto').onclick = function () { mode = 'auto'; this.setAttribute('aria-pressed', true); document.getElementById('mode-draft').setAttribute('aria-pressed', false); };
-  document.getElementById('mode-draft').onclick = function () { mode = 'draft'; this.setAttribute('aria-pressed', true); document.getElementById('mode-auto').setAttribute('aria-pressed', false); };
+  document.getElementById('mode-auto').onclick = function () { mode = inboxMode = 'auto'; this.setAttribute('aria-pressed', true); document.getElementById('mode-draft').setAttribute('aria-pressed', false); };
+  document.getElementById('mode-draft').onclick = function () { mode = inboxMode = 'draft'; this.setAttribute('aria-pressed', true); document.getElementById('mode-auto').setAttribute('aria-pressed', false); };
   document.getElementById('compose-btn').onclick = function () {
     if (RECMODE) { selected = null; renderList(); document.getElementById('thread').innerHTML = '<p class="empty">Een eigen e-mail laten beantwoorden kan in de lokale demo. Online staan de opgenomen antwoorden bij de vijf voorbeeldmails.</p>'; return; }
     selected = null; renderList();
@@ -438,6 +492,80 @@
       state.mails.push(m); save(); selected = m.id; renderList(); answer(m);
     };
   };
+
+
+  // ---------- Cockpit: customer card and "Vraag Freek" ----------
+  var KLANTEN = [{"klantnummer": "20458731", "naam": "Sanne de Vries", "email": "sanne.devries@voorbeeld.nl", "telefoon": "06 12 34 56 78", "rows": [["Adres", "Biltstraat 112, 3572 BJ Utrecht"], ["Klant sinds", "2019"], ["Producten", "stroom + gas"], ["Contract", "variabel"], ["Termijnbedrag", "€148 per maand, 1e van de maand"], ["Openstaand", "€0"], ["Jaarafrekening", "bijbetalen ca. €418 (10-02)"]], "warn": false, "contacten": []}, {"klantnummer": "20391157", "naam": "Mark Jansen", "email": "mark.jansen@voorbeeld.nl", "telefoon": "06 98 76 54 32", "rows": [["Adres", "Kruisstraat 44, 5612 CJ Eindhoven"], ["Klant sinds", "2016"], ["Producten", "stroom + gas"], ["Contract", "vast, 3 jaar, t/m 31-03-2027"], ["Termijnbedrag", "€96 per maand, 15e van de maand"], ["Openstaand", "€0"], ["Jaarafrekening", "terugbetaling ca. €64 (12-04)"], ["Zonnepanelen", "12 panelen, einde salderen ca. €535/jaar extra"]], "warn": false, "contacten": ["03-10 chat: Vraag of hij een thuisbatterij kan aansluiten; doorverwezen naar productpagina."]}, {"klantnummer": "20512094", "naam": "Fatima El Amrani", "email": "fatima.elamrani@voorbeeld.nl", "telefoon": "06 11 22 33 44", "rows": [["Adres", "Van Woustraat 201-2, 1074 AL Amsterdam"], ["Klant sinds", "2023"], ["Producten", "stroom"], ["Contract", "dynamisch"], ["Facturatie", "maandfactuur op werkelijk verbruik"], ["Openstaand", "€0"], ["November", "742 kWh, verwacht €298"], ["Situatie", "All-electric woning met warmtepomp, elektrische auto met laadpaal thuis."]], "warn": false, "contacten": []}, {"klantnummer": "20277845", "naam": "Peter Bakker", "email": "peter.bakker@voorbeeld.nl", "telefoon": "06 55 44 33 22", "rows": [["Adres", "Oosterstraat 8, 9711 NT Groningen"], ["Klant sinds", "2012"], ["Producten", "stroom + gas"], ["Contract", "variabel"], ["Termijnbedrag", "€132 per maand, 28e van de maand"], ["Openstaand", "€264 achterstand"], ["Jaarafrekening", "ongeveer neutraal ca. €12 (15-01)"]], "warn": true, "contacten": ["13-11 telefoon: Belde over de herinnering, gaf aan tijdelijk minder inkomen te hebben door ziekte. Afgesproken dat hij een regeling zou aanvragen, nog niet gedaan."]}, {"klantnummer": "20633420", "naam": "Ingrid Visser", "email": "ingrid.visser@voorbeeld.nl", "telefoon": "06 77 88 99 00", "rows": [["Adres", "Laan van Meerdervoort 310, 2563 AV Den Haag"], ["Klant sinds", "2020"], ["Producten", "stroom + gas"], ["Contract", "variabel"], ["Termijnbedrag", "€171 per maand, 1e van de maand"], ["Openstaand", "€0"], ["Jaarafrekening", "ongeveer neutraal ca. €20 (10-08)"]], "warn": false, "contacten": []}];
+  // The two administrators write about Peter and Ingrid; an advisor would look them up by name and address.
+  var MAILKLANT = { m6: '20277845', m7: '20633420' };
+  function klantFor(m) {
+    if (!m) return null;
+    var kn = MAILKLANT[m.recId || m.id];
+    return KLANTEN.find(function (k) { return k.klantnummer === kn || k.email === String(m.email).toLowerCase(); }) || null;
+  }
+  var askState = (function () { try { return JSON.parse(localStorage.getItem('essentDemoAsk') || '{}') || {}; } catch (e) { return {}; } })();
+  function saveAsk() { try { localStorage.setItem('essentDemoAsk', JSON.stringify(askState)); } catch (e) {} }
+  var ASK_CHIPS = [
+    ['Vat samen', 'Vat deze klant kort samen: wat speelt er en wat kan ik aanbieden?'],
+    ['Wat kan ik aanbieden?', 'Welke opties heb ik voor deze klant, met bedragen?'],
+    ['Tekst voor de klant', 'Schrijf een kort antwoord dat ik aan de klant kan sturen.']
+  ];
+  var ACT_CHIPS = [
+    ['Termijnbedrag aanpassen', 'Zet het termijnbedrag op … euro per maand.'],
+    ['Betalingsregeling', 'Leg een betalingsregeling vast in … delen.'],
+    ['Verhuizing doorgeven', 'Geef een verhuizing door: nieuw adres …, sleutel op …']
+  ];
+  function renderSide(m) {
+    var el = document.getElementById('cp-side'); if (!cockpit) { el.innerHTML = ''; return; }
+    var k = klantFor(m);
+    if (!m) { el.innerHTML = '<div class="kk"><p class="empty" style="margin:40px 0">Open een contact om de klantkaart te zien.</p></div>'; return; }
+    if (!k) { el.innerHTML = '<div class="kk"><div class="lbl">Klantkaart</div><h3>Onbekende afzender</h3><p class="kn">' + esc(m.email) + ' staat niet in het klantsysteem (demo).</p></div>'; return; }
+    var h = '<div class="kk"><div class="lbl">Klantkaart</div><h3>' + esc(k.naam) + '</h3><div class="kn">Klantnummer ' + k.klantnummer + ' · ' + esc(k.telefoon) + '</div><dl>';
+    k.rows.forEach(function (r) { h += '<dt>' + esc(r[0]) + '</dt><dd' + (r[0] === 'Openstaand' && k.warn ? ' class="warn"' : '') + '>' + esc(r[1]) + '</dd>'; });
+    if (k.contacten.length) h += '<dt>Eerder contact</dt><dd>' + k.contacten.map(esc).join('<br>') + '</dd>';
+    h += '</dl><div class="acts">' + ACT_CHIPS.map(function (c, i) { return '<button class="chip" data-act="' + i + '">' + esc(c[0]) + '</button>'; }).join('') + '</div></div>';
+    var a = askState[k.klantnummer] || { msgs: [] };
+    h += '<div class="ask"><div class="ask-head"><img src="erik-avatar.jpg" alt=""><div>Vraag Freek<small>Weet welke klant je open hebt. Acties lopen via dezelfde flows en regels.</small></div></div><div class="ask-log" id="ask-log">';
+    if (!a.msgs.length) h += '<div class="bub fr">Vraag me iets over ' + esc(k.naam.split(' ')[0]) + ', of laat me een actie uitvoeren.</div>';
+    a.msgs.forEach(function (x) { h += '<div class="bub ' + (x.me ? 'me' : 'fr') + '">' + esc(x.text) + '</div>'; });
+    if (a.busy) h += '<div class="bub fr wait">Freek zoekt het uit… <span id="ask-secs"></span></div>';
+    h += '</div><div class="ask-chips">' + ASK_CHIPS.map(function (c, i) { return '<button class="chip" data-ask="' + i + '">' + esc(c[0]) + '</button>'; }).join('') + '</div>';
+    h += '<div class="ask-in"><textarea id="ask-text" placeholder="Vraag Freek…"></textarea><button class="btn pink" id="ask-send">Vraag</button></div></div>';
+    el.innerHTML = h;
+    var log = document.getElementById('ask-log'); log.scrollTop = log.scrollHeight;
+    var ta = document.getElementById('ask-text');
+    document.getElementById('ask-send').onclick = function () { var v = ta.value.trim(); if (v) askFreek(k, m, v); };
+    ta.onkeydown = function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); document.getElementById('ask-send').click(); } };
+    el.querySelectorAll('[data-ask]').forEach(function (b) { b.onclick = function () { askFreek(k, m, ASK_CHIPS[+b.dataset.ask][1]); }; });
+    el.querySelectorAll('[data-act]').forEach(function (b) { b.onclick = function () {
+      var t = ACT_CHIPS[+b.dataset.act][1]; ta.value = t; ta.focus(); var i = t.indexOf('…'); ta.setSelectionRange(i, i + 1); }; });
+  }
+  async function askFreek(k, m, text) {
+    var a = askState[k.klantnummer] = askState[k.klantnummer] || { msgs: [] };
+    if (a.busy) return;
+    a.msgs.push({ me: true, text: text });
+    if (RECMODE) { a.msgs.push({ me: false, text: 'Vraag Freek werkt live, maar de verbinding met Neople Chat is er nu niet.' }); saveAsk(); renderSide(m); return; }
+    a.busy = true; saveAsk(); renderSide(m);
+    var t0 = Date.now(), tick = setInterval(function () { var s = document.getElementById('ask-secs'); if (s) s.textContent = Math.round((Date.now() - t0) / 1000) + ' s'; }, 500);
+    try {
+      if (!a.conv) {
+        var d = await api('/v1/widgets/' + KEY + '/conversations', { method: 'POST', body: JSON.stringify({ language: 'nl', page_url: location.href, page_title: 'Cockpit', context: { kanaal: 'adviseur', klantnummer: k.klantnummer, klantnaam: k.naam, onderwerp: m.subject } }) });
+        a.conv = d.conversation.id; a.token = d.visitor_token;
+      }
+      var before = (await api('/v1/conversations/' + a.conv, {}, a.token)).messages.length;
+      await api('/v1/conversations/' + a.conv + '/messages', { method: 'POST', body: JSON.stringify({ body: text }) }, a.token);
+      var reply = null;
+      while (!reply && Date.now() - t0 < 150000) {
+        await new Promise(function (r) { setTimeout(r, 2000); });
+        var ms; try { ms = (await api('/v1/conversations/' + a.conv, {}, a.token)).messages.slice(before); } catch (e) { continue; }
+        var out = ms.filter(function (x) { return x.sender_type !== 'customer' && x.body; });
+        if (out.length) reply = out[out.length - 1].body;
+      }
+      a.msgs.push({ me: false, text: reply || 'Geen antwoord gekregen, probeer het nog eens.' });
+    } catch (e) { a.msgs.push({ me: false, text: 'Freek kon niet antwoorden: ' + e.message }); }
+    clearInterval(tick); a.busy = false; saveAsk();
+    var cur = state.mails.find(function (x) { return x.id === selected; }); if (cur && klantFor(cur) === k) renderSide(cur);
+  }
 
   if (RECMODE) document.getElementById('online-note').style.display = 'block';
   // ---------- Mail Freek (form on the website) ----------
@@ -478,6 +606,8 @@
   state.mails.forEach(function (m) { if (m.status === 'busy') { m.status = 'new'; } });
   var startView = 'site'; try { startView = localStorage.getItem('essentDemoView') || 'site'; } catch (e) {}
   if (new URL(location.href).searchParams.get('view') === 'mail') startView = 'desk';
+  if (new URL(location.href).searchParams.get('view') === 'cockpit') startView = 'cockpit';
+  Object.keys(askState).forEach(function (kn) { askState[kn].busy = false; });
   show(startView);
 </script>
 </body>
